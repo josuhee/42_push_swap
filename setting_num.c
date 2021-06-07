@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 21:33:26 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 23:01:14 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/07 23:10:05 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void			setting_num(t_info *info, char *argv[], int argc)
 	idx = 1;
 	while (idx < argc)
 	{
-		printf("[%s]\n", argv[idx]);
 		tmp_idx = 0;
 		tmp = ft_split(argv[idx++], ' ');
 		while (tmp[tmp_idx])
