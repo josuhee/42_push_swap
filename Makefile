@@ -3,7 +3,11 @@ SRCS=main.c\
 	push_swap.c\
 	operation_s.c\
 	operation_r.c\
-	operation_rr.c
+	operation_rr.c\
+	ft_split.c\
+	ft_string.c\
+	setting_num.c\
+	go_error.c
 OBJS=$(SRCS:.c=.o)
 NAME=push_swap
 HEADER=-I .
