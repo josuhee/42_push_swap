@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:27:19 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 22:42:12 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/08 16:56:57 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ void			rr(t_info *info);
 
 void			rra(t_info *info, int flag);
 void			rrb(t_info *info, int flag);
-void			rrr(t_info *info, int flag);
+void			rrr(t_info *info);
 
 char			**ft_split(char const *s, char c);
 char			**go_free_split(char **str);
 void			ft_putstr(char *s);
 size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+int				ft_atoi(char *str, int *result);
 
 void			setting_num(t_info *info, char *argv[], int argc);
 

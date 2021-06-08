@@ -6,38 +6,11 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 21:33:26 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 23:10:05 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/08 16:57:18 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int		ft_atoi(char *str, int *result)
-{
-	long	tmp;
-	int		positive;
-
-	tmp = 0;
-	positive = 1;
-	while ((9 <= *str && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			positive = -1;
-		str++;
-	}
-	while ('0' <= *str && *str <= '9')
-	{
-		tmp *= 10;
-		tmp += (*str - '0') * positive;
-		str++;
-	}
-	if (*str != '\0' || tmp > 2147483647 || tmp < -2147483648)
-		return (0);
-	*result = tmp;
-	return (1);
-}
 
 static int		check_duplicate(int *arr, int size, int num)
 {
@@ -84,6 +57,24 @@ static void		info_init(t_info *info, int size)
 	info->b_top = -1;
 }
 
+void			swap_stack(t_info *info)
+{
+	int left;
+	int right;
+	int tmp;
+
+	left = 0;
+	right = info->a_top;
+	while (left < right)
+	{
+		tmp = info->a[left];
+		info->a[left] = info->a[right];
+		info->a[right] = tmp;
+		left++;
+		right--;
+	}
+}
+
 void			setting_num(t_info *info, char *argv[], int argc)
 {
 	int		size;
@@ -110,4 +101,5 @@ void			setting_num(t_info *info, char *argv[], int argc)
 		}
 		go_free_split(tmp);
 	}
+	swap_stack(info);
 }

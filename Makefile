@@ -11,8 +11,8 @@ SRCS=main.c\
 OBJS=$(SRCS:.c=.o)
 NAME=push_swap
 HEADER=-I .
-#CFLAG=-Wall -Werror -Wextra
-CFLAG=-fsanitize=address
+CFLAG=-Wall -Werror -Wextra -fsanitize=address
+#CFLAG=-fsanitize=address
 
 all: $(NAME)
 

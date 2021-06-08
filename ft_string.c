@@ -6,11 +6,38 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 19:30:45 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 22:07:27 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/08 16:56:40 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		ft_atoi(char *str, int *result)
+{
+	long	tmp;
+	int		positive;
+
+	tmp = 0;
+	positive = 1;
+	while ((9 <= *str && *str <= 13) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			positive = -1;
+		str++;
+	}
+	while ('0' <= *str && *str <= '9')
+	{
+		tmp *= 10;
+		tmp += (*str - '0') * positive;
+		str++;
+	}
+	if (*str != '\0' || tmp > 2147483647 || tmp < -2147483648)
+		return (0);
+	*result = tmp;
+	return (1);
+}
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
