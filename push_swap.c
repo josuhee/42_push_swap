@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:26:10 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/08 21:26:55 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/09 16:57:12 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,36 @@ void			push_a_or_b(t_info *info, void (*push)(t_info *), int cnt)
 	}
 }
 
-void static		set_pivot(t_info *info)
+static int		check_ascending(t_info *info)
 {
-	int idx;
+	int i;
 
-	idx = info->a_top;
-	while (idx > 0)
+	i = 0;
+	while (i < info->a_top)
 	{
-		if (info->a[idx] > info->a[idx - 1])
-		{
-			printf("pivot : %d\n", info->a[idx]);
-		}
-		idx--;
+		if (info->a[i] < info->a[i + 1])
+			return (0);
+		i++;
 	}
+	return (1);
+}
+
+//1st version
+static void		go_ascending(t_info *info, int max)
+{
+	if (check_ascending(info))
+		return ;
+	if (info->a[info->a_top] > info->a[info->a_top - 1])
+			sa(info, 1);
+	else
+		ra(info, 1);
+	if (info->a[info->a_top] == max)
+	{
+		ra(info, 1);
+		if (check_ascending(info))
+			return ;
+	}
+	go_ascending(info, max);
 }
 
 
@@ -57,10 +74,13 @@ void			push_swap(int argc, char *argv[])
 {
 	t_info	info;
 	int		i;
+	int		max;
 
 	i = 0;
 	setting_num(&info, argv, argc);
-	set_pivot(&info);
-	push_a_or_b(&info, pa, info.b_top + 1);
-	print_stack(info);
+	max = info.a[0];
+	while (++i <= info.a_top)
+		max = max > info.a[i] ? max : info.a[i];
+	//1st version
+	go_ascending(&info, max);
 }
