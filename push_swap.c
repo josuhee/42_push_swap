@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:26:10 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/13 12:19:36 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 00:09:57 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,6 @@ void			print_stack(t_info info)
 	for (int i=0;i<=info.b_top;i++)
 		printf("%d ", info.b[i]);
 	printf("\n");
-}
-
-void			push_a_or_b(t_info *info, void (*push)(t_info *), int cnt)
-{
-	int idx;
-
-	idx = 0;
-	while (idx < cnt)
-	{
-		push(info);
-		idx++;
-	}
 }
 
 static int		check_sort_a(t_info *info)
@@ -65,213 +53,117 @@ static int		check_sort_b(t_info *info)
 	return (1);
 }
 
-//1st version
-static void		go_ascending(t_info *info, int max)
+void		a_to_b(t_info *info, int size)
 {
-	if (check_sort_a(info))
-		return ;
-	if (info->a[info->a_top] > info->a[info->a_top - 1])
-			sa(info, 1);
-	else
-		ra(info, 1);
-	if (info->a[info->a_top] == max)
-	{
-		ra(info, 1);
-		if (check_sort_a(info))
-			return ;
-	}
-	go_ascending(info, max);
-}
-
-//2nd version
-static void		go_ascending2(t_info *info, int flag)
-{
-	if (info->pivot == info->a[info->a_top])
-	{
-		if (flag == 0)
-		{
-			flag = 1;
-			ra(info, 1);
-		}
-		else
-			return ;
-	}
-	if (check_sort_a(info) && info->b_top == -1)
-		return ;
-	if (info->pivot <= info->a[info->a_top])
-	{
-		/*
-		if (info->a[info->a_top] > info->a[info->a_top - 1])
-			sa(info, 1);
-		else
-			ra(info, 1);
-		*/
-		ra(info, 1);
-	}
-	else
-		pb(info);
-	go_ascending2(info, flag);
-}
-
-static void		func(t_info *info)
-{
-	int a;
-	int b;
-
-	a = check_sort_a(info);
-	b = check_sort_b(info);
-	if (a && b)
-		return ;
-	if (info->a[info->a_top] == info->max || info->b[info->b_top] == info->min)
-	{
-		if ((info->a[info->a_top] == info->max) && (info->b[info->b_top] == info->min))
-			rr(info);
-		else if (info->a[info->a_top] == info->max)
-			ra(info, 1);
-		else if (info->b[info->b_top] == info->min)
-			rb(info, 1);
-		func(info);
-		return ;
-	}
-	a = info->a[info->a_top] > info->a[info->a_top - 1] ? 1 : 0;
-	b = info->b[info->b_top] < info->b[info->b_top - 1] ? 1 : 0;
-	if ((!a && !check_sort_a(info))|| (!b && !check_sort_b(info)))
-	{
-		if ((!a && !check_sort_a(info) && (!b && !check_sort_b(info))))
-			rr(info);
-		else if (!a && !check_sort_a(info))
-			ra(info, 1);
-		else if (!b && !check_sort_b(info))
-			rb(info, 1);
-		func(info);
-		return ;
-	}
-	if (a && b)
-		ss(info);
-	else if (a)
-		sa(info, 1);
-	else
-		sb(info, 1);
-	func(info);
-}
-
-static int circle_num(t_info *info)
-{
-	int flag;
+	t_cnt cnt;
+	t_pivot point;
 	int idx;
 
-	idx = info->a_top;
-	flag = 0;
-	while (idx > 0)
+	cnt.ra = 0;
+	cnt.pb = 0;
+	cnt.rb = 0;
+	if (size <= 3)
 	{
-		if (info->a[idx] > info->a[idx - 1])
-		{
-			flag = 1;
-			idx--;
-			break ;
-		}
-		idx--;
+		small_sort(info, size, 1);
+		return ;
 	}
-	if (flag)
-	{
-		while (idx > 0)
-		{
-			if (info->a[idx] > info->a[idx - 1])
-				return (0);
-			idx--;
-		}
-	}
-	return (1);
-}
-
-static int check_under_num(t_info *info)
-{
-	int idx;
-
+	//적절한 pivot 2개 고르기
+	point = get_pivot(info, size, 1);
 	idx = 0;
-	while (idx <= info->a_top)
+	while (idx < size)
 	{
-		if (info->pivot > info->a[idx])
-			return (1);
+		if (info->a[info->a_top] >= point.p1)
+		{
+			ra(info, 1);
+			cnt.ra += 1;
+		}
+		else
+		{
+			pb(info);
+			cnt.pb += 1;
+			if (info->b[info->b_top] >= point.p2)
+			{
+				rb(info, 1);
+				cnt.rb += 1;
+			}
+		}
 		idx++;
 	}
-	return (0);
-}
-
-static void		push_b(t_info *info, int size, int cnt)
-{
-	if (cnt == size)
-		return ;
-	if (info->a[info->a_top] < info->ret[info->size - size])
+	idx = 0;
+	while (idx < cnt.ra && idx < cnt.rb)
 	{
-		pb(info);
-		push_b(info, size, cnt + 1);
+		idx++;
+		rrr(info);
 	}
+	if (idx < cnt.ra)
+		while (idx++ < cnt.ra)
+			rra(info, 1);
 	else
-	{
-		ra(info, 1);
-		push_b(info, size, cnt);
-	}
+		while (idx++ < cnt.rb)
+			rrb(info, 1);
+	a_to_b(info, cnt.ra); //[3]
+	b_to_a(info, cnt.rb); //[2]
+	b_to_a(info, cnt.pb - cnt.rb); //[1]
 }
 
-static void		push_a(t_info *info, int size, int cnt)
+void			b_to_a(t_info *info, int size)
 {
-	if (cnt == size)
-		return ;
-	pa(info);
-	if (info->a[info->a_top] > info->a[info->a_top - 1])
-		sa(info, 1);
-	push_a(info, size, cnt + 1);
-}
+	t_cnt cnt;
+	t_pivot point;
+	int idx;
 
-//3rd version
-static void		go_ascending3(t_info *info, int size)
-{
-	if (check_sort_a(info))
-		return ;
-	if (size > 0)
+	cnt.ra = 0;
+	cnt.pa = 0;
+	cnt.rb = 0;
+
+	if (size <= 3)
 	{
-		info->loc = size;
-		printf("%d\n", size);
-		push_b(info, size, 0);
-		go_ascending3(info, size / 2);
-	}
-}
-
-static void		func_3(t_info *info, int size)
-{
-	if (size < info->loc)
+		small_sort(info, size, 0);
 		return ;
-	func_3(info, size / 2);
-	if (size < 3)
-		push_a(info, size, 0);
-
-	if (!check_sort_a(info))
-	{
-		//go sort
 	}
+	//적절한 pivot 선택
+	point = get_pivot(info, size, 0);
+	idx = 0;
+	while (idx < size)
+	{
+		if (info->b[info->b_top] <= point.p2)
+		{
+			rb(info, 1);
+			cnt.rb += 1;
+		}
+		else
+		{
+			pa(info);
+			cnt.pa += 1;
+			if (info->a[info->a_top] <= point.p1)
+			{
+				ra(info, 1);
+				cnt.ra += 1;
+			}
+		}
+		idx++;
+	}
+	a_to_b(info, cnt.pa - cnt.ra); //[3]
+	idx = 0;
+	while (idx < cnt.ra && idx < cnt.rb)
+	{
+		idx++;
+		rrr(info);
+	}
+	if (idx < cnt.ra)
+		while (idx++ < cnt.ra)
+			rra(info, 1);
+	else
+		while (idx++ < cnt.rb)
+			rrb(info, 1);
+	a_to_b(info, cnt.rb); //[2]
+	b_to_a(info, cnt.ra); //[1]
 }
 
 void			push_swap(int argc, char *argv[])
 {
 	t_info	info;
-	int		i;
 
-	i = 0;
 	setting_num(&info, argv, argc);
-	/*1st version(~ 12000)*/
-	//go_ascending(&info, info.a_max);
-	/*2nd version(3400 ~ 4500)*/
-	/*
-	info.pivot=get_middle(&info);
-	go_ascending2(&info, 0);
-	func(&info);
-	push_a_or_b(&info, pa, info.b_top + 1);
-	*/
-	/*3rd version*/
-	info.pivot=get_middle(&info);
-	go_ascending3(&info, info.size / 2);
-	init_a_stack(&info);
-	print_stack(info);
-	//func_3(&info, info.size / 2);
+	a_to_b(&info, info.size);
 }

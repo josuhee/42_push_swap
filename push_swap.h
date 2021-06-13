@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:27:19 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/13 11:02:47 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/13 16:21:06 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,28 @@ typedef struct	s_info
 {
 	int			*a;
 	int			*b;
-	int			*ret;
 	int			a_top;
 	int			b_top;
-	int			pivot;
-	int			max;
-	int			min;
 	int			size;
-	int			loc;
 }				t_info;
 
+typedef struct	s_cnt
+{
+	int			ra;
+	int			rb;
+	int			pb;
+	int			pa;
+}				t_cnt;
+
+typedef struct	s_pivot
+{
+	int			p1;
+	int			p2;
+}				t_pivot;
+
 void			push_swap(int argc, char *argv[]);
+void			a_to_b(t_info *info, int size);
+void			b_to_a(t_info *info, int size);
 
 void			sa(t_info *info, int flag);
 void			sb(t_info *info, int flag);
@@ -58,6 +69,8 @@ void			setting_num(t_info *info, char *argv[], int argc);
 void			go_error();
 
 int				get_middle(t_info *info);
+void			small_sort(t_info *info, int size, int flag);
+t_pivot			get_pivot(t_info *info, int size, int flag);
 
 void			init_a_stack(t_info *info);
 
