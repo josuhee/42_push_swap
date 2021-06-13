@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:27:19 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 03:55:43 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 04:58:03 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,9 @@ void			go_error();
 t_pivot			get_pivot(t_info *info, int size, int flag);
 void			small_sort_a(t_info *info, int size);
 void			small_sort_b(t_info *info, int size);
+
+void			three_arg(t_info *info);
+void			b_to_a_util(t_info *info, t_cnt *cnt, t_pivot point, int size);
+void			a_to_b_util(t_info *info, t_cnt *cnt, t_pivot point, int size);
 
 #endif

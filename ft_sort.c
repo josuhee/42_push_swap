@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 23:06:40 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 03:54:53 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 04:01:42 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,14 @@ void				small_sort_b(t_info *info, int size)
 			pa(info);
 			if (info->a[info->a_top] > info->a[info->a_top - 1])
 				sa(info, 1);
-			small_sort_util(info);
+			if (info->a[info->a_top - 1] > info->a[info->a_top - 2])
+			{
+				ra(info, 1);
+				sa(info, 1);
+				rra(info, 1);
+				if (info->a[info->a_top] > info->a[info->a_top - 1])
+					sa(info, 1);
+			}
 		}
 	}
 }
