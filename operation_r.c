@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 16:20:34 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 18:58:54 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/13 01:58:05 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	rb(t_info *info, int flag)
 void	rr(t_info *info)
 {
 	ra(info, 0);
-	ra(info, 0);
+	rb(info, 0);
 	write(1, "rr\n", 3);
 }

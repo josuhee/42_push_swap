@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 19:29:14 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/07 22:31:33 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/12 23:15:51 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char			**ft_split(char const *s, char c)
 		return (0);
 	result = (char **)malloc(sizeof(char*) * (str_size(s, c) + 1));
 	if (!result)
-		return (0);
+		exit(1);
 	idx = 0;
 	while (*s != '\0')
 	{

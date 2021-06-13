@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:27:19 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/08 16:56:57 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/13 11:02:47 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ typedef struct	s_info
 {
 	int			*a;
 	int			*b;
+	int			*ret;
 	int			a_top;
 	int			b_top;
+	int			pivot;
+	int			max;
+	int			min;
+	int			size;
+	int			loc;
 }				t_info;
 
 void			push_swap(int argc, char *argv[]);
@@ -50,5 +56,9 @@ int				ft_atoi(char *str, int *result);
 void			setting_num(t_info *info, char *argv[], int argc);
 
 void			go_error();
+
+int				get_middle(t_info *info);
+
+void			init_a_stack(t_info *info);
 
 #endif

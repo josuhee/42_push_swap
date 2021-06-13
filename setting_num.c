@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 21:33:26 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/08 16:57:18 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/12 23:15:11 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static void		info_init(t_info *info, int size)
 	info->a_top = -1;
 	info->b = (int *)malloc(sizeof(int) * size);
 	info->b_top = -1;
+	info->size = size;
+	if (!info->a || !info->b)
+		exit(1);
 }
 
 void			swap_stack(t_info *info)
