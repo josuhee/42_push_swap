@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:27:19 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/13 16:21:06 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 03:55:43 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ void			setting_num(t_info *info, char *argv[], int argc);
 
 void			go_error();
 
-int				get_middle(t_info *info);
-void			small_sort(t_info *info, int size, int flag);
 t_pivot			get_pivot(t_info *info, int size, int flag);
-
-void			init_a_stack(t_info *info);
+void			small_sort_a(t_info *info, int size);
+void			small_sort_b(t_info *info, int size);
 
 #endif

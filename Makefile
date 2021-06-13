@@ -8,8 +8,7 @@ SRCS=main.c\
 	ft_string.c\
 	setting_num.c\
 	go_error.c\
-	ft_sort.c\
-	location.c
+	ft_sort.c
 OBJS=$(SRCS:.c=.o)
 NAME=push_swap
 HEADER=-I .

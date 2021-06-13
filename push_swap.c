@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/06 17:26:10 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 00:09:57 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 03:52:02 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ void		a_to_b(t_info *info, int size)
 	cnt.ra = 0;
 	cnt.pb = 0;
 	cnt.rb = 0;
+
 	if (size <= 3)
 	{
-		small_sort(info, size, 1);
+		small_sort_a(info, size);
 		return ;
 	}
 	//적절한 pivot 2개 고르기
@@ -118,7 +119,7 @@ void			b_to_a(t_info *info, int size)
 
 	if (size <= 3)
 	{
-		small_sort(info, size, 0);
+		small_sort_b(info, size);
 		return ;
 	}
 	//적절한 pivot 선택

@@ -6,13 +6,13 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 23:06:40 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 00:10:09 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/14 03:54:53 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		ft_sort(int arr[], int size, int flag)
+static void			ft_sort(int arr[], int size)
 {
 	int i;
 	int j;
@@ -30,21 +30,13 @@ static void		ft_sort(int arr[], int size, int flag)
 				arr[i] = arr[j];
 				arr[j] = tmp;
 			}
-			/*
-			if (!flag && arr[i] < arr[j])
-			{
-				tmp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = tmp;
-			}
-			*/
 			j++;
 		}
 		i++;
 	}
 }
 
-static int		*copy_arr(t_info *info, int size, int flag)
+static int			*copy_arr(t_info *info, int size, int flag)
 {
 	int *arr;
 	int idx;
@@ -66,14 +58,14 @@ static int		*copy_arr(t_info *info, int size, int flag)
 	return (arr);
 }
 
-t_pivot			get_pivot(t_info *info, int size, int flag)
+t_pivot				get_pivot(t_info *info, int size, int flag)
 {
 	t_pivot		point;
 	int			*arr;
 	int			term;
 
 	arr = copy_arr(info, size, flag);
-	ft_sort(arr, size, flag);
+	ft_sort(arr, size);
 	term = size / 3;
 	if (size % 3 == 2)
 		term++;
@@ -91,49 +83,40 @@ t_pivot			get_pivot(t_info *info, int size, int flag)
 	return (point);
 }
 
-void			small_sort(t_info *info, int size, int flag)
+void				small_sort_a(t_info *info, int size)
 {
-	if (flag == 1)
+	if (size >= 2)
 	{
-		if (size >= 2)
+		if (info->a[info->a_top] > info->a[info->a_top - 1])
+			sa(info, 1);
+		if (size == 3)
 		{
-			if (info->a[info->a_top] > info->a[info->a_top - 1])
-				sa(info, 1);
-			if (size == 3)
+			if (info->a[info->a_top - 1] > info->a[info->a_top - 2])
 			{
-				if (info->a[info->a_top - 1] > info->a[info->a_top - 2])
-				{
-					ra(info, 1);
+				ra(info, 1);
+				sa(info, 1);
+				rra(info, 1);
+				if (info->a[info->a_top] > info->a[info->a_top - 1])
 					sa(info, 1);
-					rra(info, 1);
-					if (info->a[info->a_top] > info->a[info->a_top - 1])
-						sa(info, 1);
-				}
 			}
 		}
 	}
-	else
+}
+
+void				small_sort_b(t_info *info, int size)
+{
+	pa(info);
+	if (size >= 2)
 	{
 		pa(info);
-		if (size >= 2)
+		if (info->a[info->a_top] > info->a[info->a_top - 1])
+			sa(info, 1);
+		if (size == 3)
 		{
 			pa(info);
 			if (info->a[info->a_top] > info->a[info->a_top - 1])
 				sa(info, 1);
-			if (size == 3)
-			{
-				pa(info);
-				if (info->a[info->a_top] > info->a[info->a_top - 1])
-					sa(info, 1);
-				if (info->a[info->a_top - 1] > info->a[info->a_top - 2])
-				{
-					ra(info, 1);
-					sa(info, 1);
-					rra(info, 1);
-					if (info->a[info->a_top] > info->a[info->a_top - 1])
-						sa(info, 1);
-				}
-			}
+			small_sort_util(info);
 		}
 	}
 }
