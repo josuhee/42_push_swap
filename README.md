@@ -23,6 +23,9 @@
 > - int의 범위를 넘음
 > - 중복된 숫자.
 
+## Bonus
+> checker 구현하기
+
 ## Evaluation
 ### Middle version
 > If the following test fails, no points will be awarded for this section. Move to the next one. Move to the next one. Use the cheacker binary given on the attachments.
