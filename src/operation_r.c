@@ -1,54 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation_rr.c                                     :+:      :+:    :+:   */
+/*   operation_r.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/07 18:59:29 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/08 16:08:04 by sujo             ###   ########.fr       */
+/*   Created: 2021/06/07 16:20:34 by sujo              #+#    #+#             */
+/*   Updated: 2021/06/16 19:25:29 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_info *info, int flag)
+void	ra(t_info *info, int flag)
 {
 	int tmp;
 	int idx;
 
-	idx = 0;
-	tmp = info->a[0];
-	while (idx < info->a_top)
+	idx = info->a_top;
+	if (idx != -1)
 	{
-		info->a[idx] = info->a[idx + 1];
-		idx++;
+		tmp = info->a[info->a_top];
+		while (idx > 0)
+		{
+			info->a[idx] = info->a[idx - 1];
+			idx--;
+		}
+		info->a[0] = tmp;
 	}
-	info->a[info->a_top] = tmp;
 	if (flag)
-		write(1, "rra\n", 4);
+		write(1, "ra\n", 3);
 }
 
-void	rrb(t_info *info, int flag)
+void	rb(t_info *info, int flag)
 {
 	int tmp;
 	int idx;
 
-	idx = 0;
-	tmp = info->b[0];
-	while (idx < info->b_top)
+	idx = info->b_top;
+	if (idx != -1)
 	{
-		info->b[idx] = info->b[idx + 1];
-		idx++;
+		tmp = info->b[info->b_top];
+		while (idx > 0)
+		{
+			info->b[idx] = info->b[idx - 1];
+			idx--;
+		}
+		info->b[0] = tmp;
 	}
-	info->b[info->b_top] = tmp;
 	if (flag)
-		write(1, "rrb\n", 4);
+		write(1, "rb\n", 3);
 }
 
-void	rrr(t_info *info)
+void	rr(t_info *info)
 {
-	rra(info, 0);
-	rrb(info, 0);
-	write(1, "rrr\n", 4);
+	ra(info, 0);
+	rb(info, 0);
+	write(1, "rr\n", 3);
 }

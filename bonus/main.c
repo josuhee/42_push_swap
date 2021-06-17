@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/07 14:48:37 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 04:37:58 by sujo             ###   ########.fr       */
+/*   Created: 2021/06/16 13:45:34 by sujo              #+#    #+#             */
+/*   Updated: 2021/06/16 20:52:57 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-int				main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc >= 2)
 	{
-		push_swap(argc, argv);
+		checker(argc, argv);
 	}
 }

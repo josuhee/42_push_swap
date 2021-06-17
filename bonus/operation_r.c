@@ -6,49 +6,50 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 16:20:34 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/13 01:58:05 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/16 19:29:25 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-void	ra(t_info *info, int flag)
+void	ra(t_info *info)
 {
 	int tmp;
 	int idx;
 
 	idx = info->a_top;
-	tmp = info->a[info->a_top];
-	while (idx > 0)
+	if (idx != -1)
 	{
-		info->a[idx] = info->a[idx - 1];
-		idx--;
+		tmp = info->a[info->a_top];
+		while (idx > 0)
+		{
+			info->a[idx] = info->a[idx - 1];
+			idx--;
+		}
+		info->a[0] = tmp;
 	}
-	info->a[0] = tmp;
-	if (flag)
-		write(1, "ra\n", 3);
 }
 
-void	rb(t_info *info, int flag)
+void	rb(t_info *info)
 {
 	int tmp;
 	int idx;
 
 	idx = info->b_top;
-	tmp = info->b[info->b_top];
-	while (idx > 0)
+	if (idx != -1)
 	{
-		info->b[idx] = info->b[idx - 1];
-		idx--;
+		tmp = info->b[info->b_top];
+		while (idx > 0)
+		{
+			info->b[idx] = info->b[idx - 1];
+			idx--;
+		}
+		info->b[0] = tmp;
 	}
-	info->b[0] = tmp;
-	if (flag)
-		write(1, "rb\n", 3);
 }
 
 void	rr(t_info *info)
 {
-	ra(info, 0);
-	rb(info, 0);
-	write(1, "rr\n", 3);
+	ra(info);
+	rb(info);
 }

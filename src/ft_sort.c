@@ -6,13 +6,13 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 23:06:40 by sujo              #+#    #+#             */
-/*   Updated: 2021/06/14 04:01:42 by sujo             ###   ########.fr       */
+/*   Updated: 2021/06/16 18:34:55 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void			ft_sort(int arr[], int size)
+void			ft_sort(int arr[], int size)
 {
 	int i;
 	int j;
@@ -36,7 +36,7 @@ static void			ft_sort(int arr[], int size)
 	}
 }
 
-static int			*copy_arr(t_info *info, int size, int flag)
+int				*copy_arr(t_info *info, int size, int flag)
 {
 	int *arr;
 	int idx;
@@ -58,7 +58,7 @@ static int			*copy_arr(t_info *info, int size, int flag)
 	return (arr);
 }
 
-t_pivot				get_pivot(t_info *info, int size, int flag)
+t_pivot			get_pivot(t_info *info, int size, int flag)
 {
 	t_pivot		point;
 	int			*arr;
@@ -83,9 +83,9 @@ t_pivot				get_pivot(t_info *info, int size, int flag)
 	return (point);
 }
 
-void				small_sort_a(t_info *info, int size)
+void			small_sort_a(t_info *info, int size)
 {
-	if (size >= 2)
+	if (size == 2 || size == 3)
 	{
 		if (info->a[info->a_top] > info->a[info->a_top - 1])
 			sa(info, 1);
@@ -101,12 +101,15 @@ void				small_sort_a(t_info *info, int size)
 			}
 		}
 	}
+	if (size == 4)
+		four_arg(info);
 }
 
-void				small_sort_b(t_info *info, int size)
+void			small_sort_b(t_info *info, int size)
 {
-	pa(info);
-	if (size >= 2)
+	if (size >= 1 && size <= 3)
+		pa(info);
+	if (size == 2 || size == 3)
 	{
 		pa(info);
 		if (info->a[info->a_top] > info->a[info->a_top - 1])
